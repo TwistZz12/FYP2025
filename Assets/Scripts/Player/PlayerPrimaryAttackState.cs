@@ -17,6 +17,7 @@ public class PlayerPrimaryAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        xInput = 0;//Add this to fix wrong attack dir.I dont know why sometimes there will be wrong why you finish running and start attack, attackdir will be -1,this will fix.
 
         if (comboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow) 
             comboCounter = 0;
@@ -28,6 +29,9 @@ public class PlayerPrimaryAttackState : PlayerState
 
         if(xInput != 0)
             attackDir = xInput;
+        
+
+        
 
 
         player.SetVelocity(player.attackMovement[comboCounter].x * attackDir, player.attackMovement[comboCounter].y);
