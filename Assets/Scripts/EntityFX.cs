@@ -6,6 +6,7 @@ public class EntityFX : MonoBehaviour
 {
 
     private SpriteRenderer sr;
+
     [Header("Flash FX")]
     [SerializeField] private float flashDuration;
     [SerializeField] private Material hitMat;
@@ -15,6 +16,8 @@ public class EntityFX : MonoBehaviour
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         originalMat = sr.material;
+
+
     }
 
     private IEnumerator FlashFX()
