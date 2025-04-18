@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum EquipmentType
@@ -44,6 +45,8 @@ public class ItemData_Equipment : ItemData
 
     [Header("Craft requirements")]
     public List<InventoryItem> craftingMaterias;
+
+    private int descriptionLength;
 
     public void Effect(Transform _enemyPosition)
     {
@@ -98,4 +101,55 @@ public class ItemData_Equipment : ItemData
         playerStats.iceDamage.RemoveModifier(iceDamage);
         playerStats.lightingDamage.RemoveModifier(lightingDamage);
     }
+
+    public override string GetDescroption()
+    {
+        sb.Length = 0;
+        descriptionLength = 0;
+
+        AddItemDescrption(strength, "Strength");
+        AddItemDescrption(agility, "Agility");
+        AddItemDescrption(intelligence, "Intelligence");
+        AddItemDescrption(vitality, "Vitality");
+
+        AddItemDescrption(damage, "Damage");
+        AddItemDescrption(critChance, "Crit.Chance");
+        AddItemDescrption(critPower, "Crit.Power");
+
+        AddItemDescrption(health, "Health");
+        AddItemDescrption(evasion, "Evasion");
+        AddItemDescrption(armor, "Armor");
+        AddItemDescrption(magicResistance, "magic Resist.");
+
+        AddItemDescrption(fireDamage, "FireDamage");
+        AddItemDescrption(iceDamage, "IceDamage");
+        AddItemDescrption(lightingDamage, "LightingDamage");
+
+
+        if(descriptionLength < 5)
+        {
+            for (int i = 0; i < 5 - descriptionLength; i++)
+            {
+                sb.AppendLine();
+                sb.Append("");
+            }
+        }
+
+
+        return sb.ToString();
+    }
+
+    private void AddItemDescrption(int _value,string _name)
+    {
+        if(_value != 0)
+        {
+            if (sb.Length > 0)
+                sb.AppendLine();
+
+            if(_value > 0)
+                sb.Append("+ " + _value + " " + _name);
+
+            descriptionLength++;
+        }
+    } 
 }
