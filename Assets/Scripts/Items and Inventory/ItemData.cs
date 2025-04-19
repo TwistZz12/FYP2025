@@ -22,7 +22,7 @@ public class ItemData : ScriptableObject
     protected StringBuilder sb = new StringBuilder();
 
 
-    public virtual string GetDescroption()
+    public virtual string GetDescription()
     {
         return "";
     }

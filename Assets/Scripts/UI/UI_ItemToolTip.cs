@@ -9,11 +9,8 @@ public class UI_ItemToolTip : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI itemTypeText;
     [SerializeField] private TextMeshProUGUI itemDescription;
+
     [SerializeField] private int defaultFontSize = 32;
-    void Start()
-    {
-        
-    }
 
     public void ShowToolTip(ItemData_Equipment item)
     {
@@ -22,7 +19,7 @@ public class UI_ItemToolTip : MonoBehaviour
 
         itemNameText.text = item.itemName;
         itemTypeText.text = item.equipmentType.ToString();
-        itemDescription.text = item.GetDescroption();
+        itemDescription.text = item.GetDescription();
 
 
         if (itemNameText.text.Length > 12)

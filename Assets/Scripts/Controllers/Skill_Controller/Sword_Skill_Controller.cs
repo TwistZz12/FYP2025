@@ -99,6 +99,8 @@ public class Sword_Skill_Controller : MonoBehaviour
         transform.parent = null;
         isReturning = true;
 
+        // sword.skill.setCooldown;
+
     } 
 
     private void Update()
@@ -219,8 +221,15 @@ public class Sword_Skill_Controller : MonoBehaviour
 
     private void SwordSkillDamage(Enemy enemy)
     {
-        player.stats.DoDamage(enemy.GetComponent<CharacterStats>());
-        enemy.FreezeTimeFor(freezeTimeDuration);
+        EnemyStats enemyStats = enemy.GetComponent<EnemyStats>();
+
+        player.stats.DoDamage(enemyStats);
+
+        if(player.skill.sword.timeStopUnlocked)
+            enemy.FreezeTimeFor(freezeTimeDuration);
+
+        if (player.skill.sword.vulnurableUnlocked)
+            enemyStats.MakeVulnerableFor(freezeTimeDuration);
    
 
         ItemData_Equipment equipedAmulet = Inventory.instance.GetEquipment(EquipmentType.Amulet);

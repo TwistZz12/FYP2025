@@ -102,31 +102,42 @@ public class ItemData_Equipment : ItemData
         playerStats.lightingDamage.RemoveModifier(lightingDamage);
     }
 
-    public override string GetDescroption()
+    public override string GetDescription()
     {
         sb.Length = 0;
         descriptionLength = 0;
 
-        AddItemDescrption(strength, "Strength");
-        AddItemDescrption(agility, "Agility");
-        AddItemDescrption(intelligence, "Intelligence");
-        AddItemDescrption(vitality, "Vitality");
+        AddItemDescription(strength, "Strength");
+        AddItemDescription(agility, "Agility");
+        AddItemDescription(intelligence, "Intelligence");
+        AddItemDescription(vitality, "Vitality");
 
-        AddItemDescrption(damage, "Damage");
-        AddItemDescrption(critChance, "Crit.Chance");
-        AddItemDescrption(critPower, "Crit.Power");
+        AddItemDescription(damage, "Damage");
+        AddItemDescription(critChance, "Crit.Chance");
+        AddItemDescription(critPower, "Crit.Power");
 
-        AddItemDescrption(health, "Health");
-        AddItemDescrption(evasion, "Evasion");
-        AddItemDescrption(armor, "Armor");
-        AddItemDescrption(magicResistance, "magic Resist.");
+        AddItemDescription(health, "Health");
+        AddItemDescription(evasion, "Evasion");
+        AddItemDescription(armor, "Armor");
+        AddItemDescription(magicResistance, "magic Resist.");
 
-        AddItemDescrption(fireDamage, "FireDamage");
-        AddItemDescrption(iceDamage, "IceDamage");
-        AddItemDescrption(lightingDamage, "LightingDamage");
+        AddItemDescription(fireDamage, "FireDamage");
+        AddItemDescription(iceDamage, "IceDamage");
+        AddItemDescription(lightingDamage, "LightingDamage");
 
 
-        if(descriptionLength < 5)
+
+        for (int i = 0; i < itemEffects.Length; i++)
+        {
+            if (itemEffects[i].effectDescription.Length > 0)
+            {
+                sb.AppendLine();
+                sb.AppendLine("Unique: " + itemEffects[i].effectDescription);
+                descriptionLength++;
+            }
+        }
+
+        if (descriptionLength < 5)
         {
             for (int i = 0; i < 5 - descriptionLength; i++)
             {
@@ -139,7 +150,7 @@ public class ItemData_Equipment : ItemData
         return sb.ToString();
     }
 
-    private void AddItemDescrption(int _value,string _name)
+    private void AddItemDescription(int _value,string _name)
     {
         if(_value != 0)
         {

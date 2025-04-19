@@ -46,7 +46,7 @@ public class Blackhole_Skill_Controller : MonoBehaviour
 
     private void Update()
     {
-        blackholeTimer = Mathf.Infinity;
+        //blackholeTimer = Mathf.Infinity;
 
         cloneAttackTimer -= Time.deltaTime;
         blackholeTimer -= Time.deltaTime;
