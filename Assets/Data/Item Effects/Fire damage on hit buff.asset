@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20840c3b36be69f45a12adef8ddff8b2, type: 3}
   m_Name: Fire damage on hit buff
   m_EditorClassIdentifier: 
+  effectDescription: Increase fire damage on hit.
   buffType: 11
   buffAmount: 3
   buffDuration: 2

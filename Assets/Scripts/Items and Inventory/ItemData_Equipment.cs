@@ -16,7 +16,7 @@ public class ItemData_Equipment : ItemData
    public EquipmentType equipmentType;
 
 
-
+    [Header("Unique effect")]
     public float itemCooldown;
     public ItemEffect[] itemEffects;
 
