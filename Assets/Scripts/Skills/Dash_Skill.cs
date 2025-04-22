@@ -37,6 +37,12 @@ public class Dash_Skill : Skill
 
     }
 
+    protected override void CheckUnlock()
+    {
+        UnlockDash();
+        UnlockCloneOnDash();
+        UnlockCloneOnArrival();
+    }
 
     private void UnlockDash()
     {
