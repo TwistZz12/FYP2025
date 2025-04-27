@@ -11,6 +11,7 @@ public class LostCurrencyController : MonoBehaviour
         if (collision.GetComponent<Player>() != null)
         {
             Debug.Log("Picked up currency");
+            AudioManager.instance.PlaySFX(17, transform);
             PlayerManager.instance.currency += currency;
             Destroy(this.gameObject);
         }

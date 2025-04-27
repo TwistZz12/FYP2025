@@ -5,7 +5,7 @@ using UnityEngine;
 public class Skill : MonoBehaviour
 {
     public float cooldown;
-    protected float cooldownTimer;
+    public float cooldownTimer;
 
     protected Player player;
 
@@ -40,7 +40,7 @@ public class Skill : MonoBehaviour
         }
 
 
-        Debug.Log("Skill is on cooldown");
+        player.fx.CreatePopUpText("Cooldown");
         return false;
     }
 

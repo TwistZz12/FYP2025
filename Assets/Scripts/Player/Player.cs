@@ -28,6 +28,7 @@ public class Player : Entity
     public SkillManager skill { get; private set; }
     public GameObject sword { get; private set; }
 
+    public PlayerFX playerFX { get; private set; }
 
     #region States
     public PlayerStateMachine stateMachine { get; private set; }
@@ -85,10 +86,15 @@ public class Player : Entity
         defaultMoveSpeed = moveSpeed;
         defaultJumpForce = jumpForce;
         defaultDashSpeed = dashSpeed;
+
+        playerFX = GetComponent<PlayerFX>();
     }
 
     protected override void Update()
     {
+        if(Time.timeScale == 0)
+            return;
+
         base.Update();
         stateMachine.currentState.Update();
         CheckForDashInput();
@@ -164,5 +170,10 @@ public class Player : Entity
         base.Die();
 
         stateMachine.ChangeState(deadState);
+    }
+
+    protected override void SetupZeroKnockbackPower()
+    {
+        knockbackPower = new Vector2(0, 0);
     }
 }

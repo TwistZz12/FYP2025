@@ -12,10 +12,12 @@ public class PlayerDashState : PlayerState
     {
         base.Enter();
 
+        AudioManager.instance.PlaySFX(35, null);
         player.skill.dash.CloneOnDash();
 
-
         stateTimer = player.dashDuration;
+
+        player.stats.MakeInvincible(true);
     }
 
     public override void Exit()
@@ -24,20 +26,25 @@ public class PlayerDashState : PlayerState
 
         player.skill.dash.CloneOnArrival();
         player.SetVelocity(0, rb.velocity.y);
+
+        player.stats.MakeInvincible(false);
+        
     }
 
     public override void Update()
     {
         base.Update();
         if (!player.isGroundDetected() && player.isWallDetected())
-        {
-            stateMachine.ChangeState(player.wallSlide);
-        }
+              stateMachine.ChangeState(player.wallSlide);
+        
 
             player.SetVelocity(player.dashSpeed * player.dashDir, 0);
 
         
         if (stateTimer < 0)
             stateMachine.ChangeState(player.idleState);
+
+        player.playerFX.CreateAfterImage();
+
     }
 }

@@ -14,18 +14,32 @@ public class ItemDrop : MonoBehaviour
 
     public virtual void GenerateDrop()
     {
+        dropList.Clear(); // 确保列表是空的，避免重复添加
+        
         for (int i = 0; i < possibleDrop.Length; i++)
         {
             if(Random.Range(0,100) <= possibleDrop[i].dropChance)
                     dropList.Add(possibleDrop[i]);
         }
-
-        for (int i = 0; i < possibleItemDrop; i++)
+        
+        // 如果没有物品符合掉落条件，直接返回
+        if (dropList.Count == 0)
+            return;
+        
+        int itemsToDrop = Mathf.Min(possibleItemDrop, dropList.Count);
+        
+        for (int i = 0; i < itemsToDrop; i++)
         {
-            ItemData randomItem = dropList[Random.Range(0, dropList.Count - 1)];
-
+            // 确保随机索引正确计算，避免越界
+            int randomIndex = Random.Range(0, dropList.Count);
+            ItemData randomItem = dropList[randomIndex];
+            
             dropList.Remove(randomItem);
             DropItem(randomItem);
+            
+            // 如果列表已空，退出循环
+            if (dropList.Count == 0)
+                break;
         }
     }
 

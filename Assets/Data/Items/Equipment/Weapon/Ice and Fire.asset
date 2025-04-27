@@ -15,7 +15,8 @@ MonoBehaviour:
   itemType: 1
   itemName: Ice and Fire
   icon: {fileID: 1398721256, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
-  dropChance: 6.2
+  itemId: f9f4ea59c17ccc54ba362f44fd1f937e
+  dropChance: 4.3
   equipmentType: 0
   itemCooldown: 0
   itemEffects:
@@ -32,11 +33,13 @@ MonoBehaviour:
   armor: 0
   evasion: 0
   magicResistance: 0
-  fireDamage: 5
-  iceDamage: 7
+  fireDamage: 15
+  iceDamage: 17
   lightingDamage: 0
   craftingMaterias:
   - data: {fileID: 11400000, guid: 48c0cabda77ece24d89f8dfe94d3a186, type: 2}
-    stackSize: 1
-  - data: {fileID: 11400000, guid: 3c913fcadbf5a08409cab3b3d997c57d, type: 2}
-    stackSize: 5
+    stackSize: 2
+  - data: {fileID: 11400000, guid: f1636306f0a3f29498e0bf950e668c08, type: 2}
+    stackSize: 3
+  - data: {fileID: 11400000, guid: dfbf79ae056675449bd18bb18ef13313, type: 2}
+    stackSize: 2

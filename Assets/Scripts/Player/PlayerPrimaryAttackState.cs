@@ -17,6 +17,8 @@ public class PlayerPrimaryAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        //AudioManager.instance.PlaySFX(2); // attack sound effect
+
         xInput = 0;//Add this to fix wrong attack dir.I dont know why sometimes there will be wrong why you finish running and start attack, attackdir will be -1,this will fix.
 
         if (comboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow) 

@@ -41,8 +41,9 @@ public class Clone_Skill_Controller : MonoBehaviour
     public void SetupClone(Transform _newTransform, float _cloneDuration, bool _canAttack, Vector3 _offset,Transform _closestEnemy,bool _canDuplicate,float _chanceToDuplicate,Player _player,float _attackMultiplier)
     {
         if (_canAttack)
-        
             anim.SetInteger("AttackNumber", Random.Range(1, 3));
+
+        AudioManager.instance.PlaySFX(22, transform);
 
         attackMultiplier = _attackMultiplier;
         player = _player;
@@ -69,6 +70,8 @@ public class Clone_Skill_Controller : MonoBehaviour
             if (hit.GetComponent<Enemy>() != null)
             {
                 //player.stats.DoDamage(hit.GetComponent<CharacterStats>());
+
+                hit.GetComponent<Entity>().SetupKnockbackDir(transform);
 
                 PlayerStats playerStats = player.GetComponent<PlayerStats>();
                 EnemyStats enemyStats = hit.GetComponent<EnemyStats>();

@@ -1,10 +1,13 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Build.Content;
 using UnityEngine;
 
-public class UI : MonoBehaviour
+public class UI : MonoBehaviour,ISaveManager
 {
+    public static UI instance;
+
     [Header("End screen")]
     [SerializeField] private UI_FadeScreen fadeScreen;
     [SerializeField] private GameObject endText;
@@ -23,10 +26,18 @@ public class UI : MonoBehaviour
     public UI_StatToolTip statToolTip;
     public UI_CraftWindow craftWindow;
 
+    [SerializeField] private UI_VolumeSlider[] volumeSettings;
+
     private void Awake()
     {
+        instance = this;
         SwitchTo(skillTreeUI);//Fix bug
         fadeScreen.gameObject.SetActive(true);
+    }
+
+    public UI_FadeScreen GetFadeScreen()
+    {
+        return fadeScreen;
     }
 
     void Start()
@@ -56,18 +67,28 @@ public class UI : MonoBehaviour
 
     public void SwitchTo(GameObject _menu)
     {
-
         for (int i = 0; i < transform.childCount; i++)
         {
             bool fadeScreen = transform.GetChild(i).GetComponent<UI_FadeScreen>() != null; // we need this to keep fade screen game object active
-
 
             if (fadeScreen == false)
                 transform.GetChild(i).gameObject.SetActive(false);
         }
 
         if (_menu != null)
+        {
+            if(AudioManager.instance != null)
+                AudioManager.instance.PlaySFX(7, null);
             _menu.SetActive(true);
+        }
+
+        if (GameManager.instance != null)
+        {
+            if (_menu == inGameUI)
+                GameManager.instance.PauseGame(false);
+            else
+                GameManager.instance.PauseGame(true);
+        }
     }
 
     public void SwitchWithKeyTo(GameObject _menu)
@@ -103,10 +124,32 @@ public class UI : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         endText.SetActive(true);
+        AudioManager.instance.PlaySFX(11, null);
         yield return new WaitForSeconds(1.5f);
         restartButton.SetActive(true);
-
     }
 
     public void RestartGameButton() => GameManager.instance.RestartScene();
+
+    public void LoadData(GameData _data)
+    {
+        foreach (KeyValuePair<string, float> pair in _data.volumeSettings)
+        {
+            foreach (UI_VolumeSlider item in volumeSettings)
+            {
+                if (item.parametr == pair.Key)
+                    item.LoadSlider(pair.Value);
+            }
+        }
+    }
+
+    public void SaveData(ref GameData _data)
+    {
+        _data.volumeSettings.Clear();
+
+        foreach (UI_VolumeSlider item in volumeSettings)
+        {
+            _data.volumeSettings.Add(item.parametr, item.slider.value);
+        }
+    }
 }

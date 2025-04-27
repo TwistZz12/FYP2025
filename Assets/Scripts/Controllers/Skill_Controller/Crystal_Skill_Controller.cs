@@ -78,8 +78,9 @@ public class Crystal_Skill_Controller : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, cd.radius);
         foreach (var hit in colliders)
         {
-            if (hit.GetComponent<Enemy>() != null)
-
+            if (hit.GetComponent<Enemy>() != null) 
+            {
+                hit.GetComponent<Entity>().SetupKnockbackDir(transform);
                 player.stats.DoMagicalDamage(hit.GetComponent<CharacterStats>());
 
 
@@ -88,6 +89,7 @@ public class Crystal_Skill_Controller : MonoBehaviour
             if (equipedAmulet != null)
                 equipedAmulet.Effect(hit.transform);
 
+            }
         }
     }
 

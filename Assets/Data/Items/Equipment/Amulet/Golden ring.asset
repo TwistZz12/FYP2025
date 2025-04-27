@@ -15,24 +15,27 @@ MonoBehaviour:
   itemType: 1
   itemName: Golden ring
   icon: {fileID: -878758905, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  itemId: df3cb23ba7888a7419fc1643c6fcd486
   dropChance: 0
   equipmentType: 2
   itemCooldown: 0
   itemEffects: []
-  strength: 32
+  strength: 20
   agility: 0
   intelligence: 0
   vitality: 0
   damage: 0
   critChance: 0
   critPower: 0
-  health: 1
-  armor: 31
-  evasion: 2
-  magicResistance: 32
-  fireDamage: 0
+  health: 13
+  armor: 13
+  evasion: 13
+  magicResistance: 13
+  fireDamage: 15
   iceDamage: 0
   lightingDamage: 0
   craftingMaterias:
   - data: {fileID: 11400000, guid: 3c913fcadbf5a08409cab3b3d997c57d, type: 2}
-    stackSize: 5
+    stackSize: 2
+  - data: {fileID: 11400000, guid: dfbf79ae056675449bd18bb18ef13313, type: 2}
+    stackSize: 1

@@ -16,19 +16,22 @@ public class Entity : MonoBehaviour
 
 
     [Header("Knockback info")]
-    [SerializeField] protected Vector2 knockbackDirection;
-    [SerializeField] protected float knockbackDuration;
+    [SerializeField] protected Vector2 knockbackPower = new Vector2(7,12);
+    [SerializeField] protected Vector2 knockbackOffect = new Vector2(.5f,2);
+    [SerializeField] protected float knockbackDuration = .07f;
     protected bool isKnocked;
 
 
     [Header("Collision info")]
     public Transform attackCheck;
-    public float attackCheckRadius;
+    public float attackCheckRadius = 1.2f;
     [SerializeField] protected Transform groundCheck;
-    [SerializeField] protected float groundCheckDistance;
+    [SerializeField] protected float groundCheckDistance = 1;
     [SerializeField] protected Transform wallCheck;
-    [SerializeField] protected float wallCheckDistance;
+    [SerializeField] protected float wallCheckDistance = .8f;
     [SerializeField] protected LayerMask whatIsGround;
+
+    public int knockbackDir{ get; private set; }
 
     public int facingDir { get; private set; } = 1;
     protected bool facingRight = true;
@@ -69,15 +72,35 @@ public class Entity : MonoBehaviour
 
     public virtual void DamageImpact() => StartCoroutine("HitKnockback");
 
+    public virtual void SetupKnockbackDir(Transform _damageDirection)
+    {
+        if (_damageDirection.position.x > transform.position.x)
+            knockbackDir = -1;
+        else if (_damageDirection.position.x < transform.position.x)
+            knockbackDir = 1;
+    }
+
+    public void SetupKnockbackPower(Vector2 _knockbackpower) => knockbackPower = _knockbackpower;
 
     protected virtual IEnumerator HitKnockback()
     {
         isKnocked = true;
 
-        rb.velocity = new Vector2(knockbackDirection.x * -facingDir, knockbackDirection.y);
+        float xOffset = Random.Range(knockbackOffect.x, knockbackOffect.y);
+
+        //if (knockbackPower.x > 0 || knockbackPower.y > 0)// take damage not to influence move
+        rb.velocity = new Vector2((knockbackPower.x + xOffset )* knockbackDir, knockbackPower.y);
 
         yield return new WaitForSeconds(knockbackDuration);
         isKnocked = false;
+
+        SetupZeroKnockbackPower();
+    }
+
+
+    protected virtual void SetupZeroKnockbackPower()
+    {
+
     }
 
     #region Velocity
@@ -107,7 +130,7 @@ public class Entity : MonoBehaviour
     protected virtual void OnDrawGizmos()
     {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
-        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
+        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance * facingDir, wallCheck.position.y));
         Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
     }
     #endregion
@@ -128,6 +151,14 @@ public class Entity : MonoBehaviour
             Flip();
         else if (_x < 0 && facingRight)
             Flip();
+    }
+
+    public virtual void SetupDefailtFacingDir(int _direction)
+    {
+        facingDir = _direction;
+
+        if (facingDir == -1)
+            facingRight = false;
     }
     #endregion
 

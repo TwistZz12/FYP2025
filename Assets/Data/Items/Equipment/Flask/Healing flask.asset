@@ -15,6 +15,7 @@ MonoBehaviour:
   itemType: 1
   itemName: Healing flask
   icon: {fileID: -410334530, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  itemId: 8055a9c74501145438b870c3d4c820eb
   dropChance: 0
   equipmentType: 3
   itemCooldown: 15
@@ -34,4 +35,8 @@ MonoBehaviour:
   fireDamage: 0
   iceDamage: 0
   lightingDamage: 0
-  craftingMaterias: []
+  craftingMaterias:
+  - data: {fileID: 11400000, guid: ed195a6c84011794b9900197302a92c5, type: 2}
+    stackSize: 2
+  - data: {fileID: 11400000, guid: 406d78266426cc74c86202b65f97689e, type: 2}
+    stackSize: 2

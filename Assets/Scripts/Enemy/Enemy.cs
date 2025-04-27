@@ -4,25 +4,32 @@ using UnityEditor.Formats.Fbx.Exporter;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(EnemyStats))]
+[RequireComponent(typeof(EntityFX))]
+[RequireComponent(typeof(ItemDrop))]
 public class Enemy : Entity
 {
     [SerializeField] protected LayerMask whatIsPlayer;
 
     [Header("Stunned info")]
-    public float stunDuration;
-    public Vector2 stunDirection;
+    public float stunDuration = 1;
+    public Vector2 stunDirection = new Vector2(10, 12);
     protected bool canBeStunned;
     [SerializeField] protected GameObject counterImage;
 
      
     [Header("Move info")]
-    public float moveSpeed;
-    public float idleTime;
-    public float battleTime;
+    public float moveSpeed = 1.5f;
+    public float idleTime = 2;
+    public float battleTime = 7;
     private float defaultMoveSpeed;
 
     [Header("Attack info")]
-    public float attackDistance;
+    public float agroDistance = 2;
+    public float attackDistance = 2;
     public float attackCooldown;
     [HideInInspector] public float lastTimeAttacked;
 
@@ -116,6 +123,10 @@ public class Enemy : Entity
     }
 
     public virtual void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
+    public virtual void AnimationSpecialAttackTrigger()
+    {
+
+    }
 
     public virtual RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, 50 , whatIsPlayer);
 

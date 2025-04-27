@@ -66,7 +66,12 @@ public class EnemyStats : CharacterStats
 
     public override void TakeDamage(int _damage)
     {
-        base.TakeDamage(_damage);
+        DecreaseHealthBy(_damage);
+        GetComponent<Entity>().DamageImpact();
+        fx.StartCoroutine("FlashFX");
+
+        if (currentHealth < 0 && !isDead)
+            Die();
     }
 
     protected override void Die()
@@ -76,5 +81,7 @@ public class EnemyStats : CharacterStats
 
         PlayerManager.instance.currency += soulsDropAmount.GetValue();
         myDropSystem.GenerateDrop();
+
+        Destroy(gameObject, 5f);
     }
 }

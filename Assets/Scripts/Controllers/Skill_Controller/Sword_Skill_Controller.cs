@@ -57,10 +57,15 @@ public class Sword_Skill_Controller : MonoBehaviour
         freezeTimeDuration = _freezeTimeDuration;
         returnSpeed = _returnSpeed;
 
+        if(isSpinning)
+            AudioManager.instance.PlaySFX(26, transform);
+        else if(isBouncing)
+            AudioManager.instance.PlaySFX(26, transform);
+        else
+            AudioManager.instance.PlaySFX(27, transform);
 
         rb.velocity = _dir;
         rb.gravityScale = _gravityScale;
-
 
         if(pierceAmount <= 0 ) 
             anim.SetBool("Rotation", true);
@@ -169,6 +174,7 @@ public class Sword_Skill_Controller : MonoBehaviour
         wasStopped = true;
         rb.constraints = RigidbodyConstraints2D.FreezePosition;
         spinTimer = spinDuration;
+        AudioManager.instance.PlaySFX(26, transform);
     }
 
     private void BounceLogic()
@@ -179,6 +185,7 @@ public class Sword_Skill_Controller : MonoBehaviour
 
             if (Vector2.Distance(transform.position, enemyTarget[targetIndex].position) < .1f)
             {
+                AudioManager.instance.PlaySFX(26, transform);
                 SwordSkillDamage(enemyTarget[targetIndex].GetComponent<Enemy>());
 
                 targetIndex++;
