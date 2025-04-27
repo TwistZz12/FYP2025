@@ -338,22 +338,22 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   maxHealth:
-    baseValue: 75
+    baseValue: 200
     modifiers: 
   armor:
-    baseValue: 0
+    baseValue: 3
     modifiers: 
   evasion:
-    baseValue: 0
+    baseValue: 3
     modifiers: 
   magicResistance:
-    baseValue: 0
+    baseValue: 3
     modifiers: 
   fireDamage:
     baseValue: 0
     modifiers: 
   iceDamage:
-    baseValue: 0
+    baseValue: 3
     modifiers: 
   lightingDamage:
     baseValue: 0
@@ -365,9 +365,9 @@ MonoBehaviour:
   shockStrikePrefab: {fileID: 629620433214236628, guid: e3b1669d36a764f449f8e951ccda6357, type: 3}
   currentHealth: 0
   soulsDropAmount:
-    baseValue: 0
+    baseValue: 150
     modifiers: 
-  level: 1
+  level: 2
   percentageModifier: 0.4
 --- !u!114 &1853447337874894143
 MonoBehaviour:
@@ -384,6 +384,7 @@ MonoBehaviour:
   popUpTextPrefab: {fileID: 1987143333424225500, guid: 79711b78fb269074d8a8cf26d7b80a60, type: 3}
   flashDuration: 0.2
   hitMat: {fileID: 2100000, guid: 6d29a2d1ed6d63342b3c9eabe5b1f869, type: 2}
+  originalMat: {fileID: 0}
   igniteColor:
   - {r: 0.9339623, g: 0.2951673, b: 0.2951673, a: 1}
   - {r: 0.9716981, g: 0.6737718, b: 0.6737718, a: 1}
@@ -398,6 +399,7 @@ MonoBehaviour:
   shockFx: {fileID: 2413002750955165455}
   hitFx: {fileID: 7050410028250724994, guid: e281461dcdf0433469784bfa3edac1a3, type: 3}
   criticalHitFx: {fileID: 1692765460881016142, guid: 0fd7928bcc6f50049a617fd8c3a3adb8, type: 3}
+  myHealthBar: {fileID: 0}
 --- !u!114 &8798911435548918690
 MonoBehaviour:
   m_ObjectHideFlags: 0

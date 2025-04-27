@@ -61,7 +61,13 @@ public class Enemy_DeathBringer : Enemy
     {
         base.Die();
         stateMachine.ChangeState(deadState);
+        StartCoroutine(ShowWinUI());
+    }
 
+    private IEnumerator ShowWinUI()
+    {
+        yield return new WaitForSeconds(1f);
+        UI.instance.ShowYouWinUI();
     }
 
     public void CastSpell()

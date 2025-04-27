@@ -19,6 +19,7 @@ public class UI : MonoBehaviour,ISaveManager
     [SerializeField] private GameObject craftUI;
     [SerializeField] private GameObject optionsUI;
     [SerializeField] private GameObject inGameUI;
+    [SerializeField] private GameObject YouwinUI;
 
 
     public UI_SkillToolTip skillToolTip;
@@ -151,5 +152,10 @@ public class UI : MonoBehaviour,ISaveManager
         {
             _data.volumeSettings.Add(item.parametr, item.slider.value);
         }
+    }
+
+    public void ShowYouWinUI()
+    {
+        YouwinUI.SetActive(true);
     }
 }

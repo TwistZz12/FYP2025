@@ -15,7 +15,7 @@ public class EntityFX : MonoBehaviour
     [Header("Flash FX")]
     [SerializeField] private float flashDuration;
     [SerializeField] private Material hitMat;
-    private Material originalMat;
+    public Material originalMat;
 
     [Header("Aliment colors")]
     [SerializeField] private Color[] igniteColor;
@@ -31,7 +31,9 @@ public class EntityFX : MonoBehaviour
     [SerializeField] private GameObject hitFx;
     [SerializeField] private GameObject criticalHitFx;
 
-    private GameObject myHealthBar;
+
+
+    public GameObject myHealthBar;
 
     protected virtual void Start()
     {
@@ -39,7 +41,7 @@ public class EntityFX : MonoBehaviour
         player = PlayerManager.instance.player;
 
         originalMat = sr.material;
-        myHealthBar = GetComponentInChildren<UI_HealthBar>().gameObject;
+        myHealthBar = GetComponentInChildren<UI_HealthBar>(true).gameObject;
     }
 
     public void CreatePopUpText(string _text)

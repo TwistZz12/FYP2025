@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
 
     public bool playBgm;
     private int bgmIndex;
+    private bool isCrossFading;
 
     private bool canPlaySFX;
     private void Awake()
@@ -27,6 +28,8 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
+        if (isCrossFading) return;
+
         if (!playBgm)
             StopAllBGM();
         else
@@ -105,4 +108,49 @@ public class AudioManager : MonoBehaviour
     }
 
     private void AllowSFX() => canPlaySFX = true;
+
+    public IEnumerator FadeOutCurrentBGM(float duration)
+    {
+        AudioSource src = bgm[bgmIndex];
+        float startVol = src.volume;
+        float t = 0;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            src.volume = Mathf.Lerp(startVol, 0, t / duration);
+            yield return null;
+        }
+        src.Stop();
+        src.volume = startVol;
+    }
+
+    public IEnumerator FadeInBGM(int newIndex, float duration)
+    {
+        AudioSource src = bgm[newIndex];
+        float targetVol = 1f;
+        src.volume = 0;
+        src.Play();
+        float t = 0;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            src.volume = Mathf.Lerp(0, targetVol, t / duration);
+            yield return null;
+        }
+    }
+
+    public void CrossFadeBGM(int newIndex, float fadeOutTime, float fadeInTime)
+    {
+        if (isCrossFading) return;
+        isCrossFading = true;
+        StartCoroutine(CrossFadeCoroutine(newIndex, fadeOutTime, fadeInTime));
+    }
+
+    private IEnumerator CrossFadeCoroutine(int newIndex, float fadeOutTime, float fadeInTime)
+    {
+        yield return FadeOutCurrentBGM(fadeOutTime);
+        yield return FadeInBGM(newIndex, fadeInTime);
+        bgmIndex = newIndex;
+        isCrossFading = false;
+    }
 }

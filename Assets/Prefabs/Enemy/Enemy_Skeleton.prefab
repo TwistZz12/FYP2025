@@ -61,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 1002985341522980056}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.147, z: 0}
+  m_LocalPosition: {x: 0.176, y: -0.147, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -92,7 +92,7 @@ Transform:
   m_GameObject: {fileID: 1566893626463084647}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.574, y: -1.013, z: 0}
+  m_LocalPosition: {x: 0.616, y: -1.013, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -203,7 +203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4003086000419271505}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_ConstrainProportionsScale: 0
@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockbackPower: {x: 7, y: 12}
+  knockbackOffect: {x: 0.5, y: 2}
   knockbackDuration: 0.07
   attackCheck: {fileID: 2848835652516612266}
   attackCheckRadius: 0.8
@@ -251,6 +252,7 @@ MonoBehaviour:
   moveSpeed: 1.5
   idleTime: 2
   battleTime: 7
+  agroDistance: 2
   attackDistance: 1.5
   attackCooldown: 0.4
   lastTimeAttacked: 0
@@ -324,7 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx: {fileID: 0}
   strength:
-    baseValue: 2
+    baseValue: 10
     modifiers: 
   agility:
     baseValue: 0
@@ -336,25 +338,25 @@ MonoBehaviour:
     baseValue: 10
     modifiers: 
   damage:
-    baseValue: 100
+    baseValue: 20
     modifiers: 
   critChance:
-    baseValue: 0
+    baseValue: 5
     modifiers: 
   critPower:
-    baseValue: 0
+    baseValue: 10
     modifiers: 
   maxHealth:
-    baseValue: 100
+    baseValue: 150
     modifiers: 
   armor:
-    baseValue: 0
+    baseValue: 5
     modifiers: 
   evasion:
-    baseValue: 0
+    baseValue: 5
     modifiers: 
   magicResistance:
-    baseValue: 0
+    baseValue: 5
     modifiers: 
   fireDamage:
     baseValue: 0
@@ -430,6 +432,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c98fd8e128181334588730c376ee922c, type: 2}
   - {fileID: 11400000, guid: f6e219d4868fa904c9b45186c47ba0c1, type: 2}
   - {fileID: 11400000, guid: 7d1117352c5c70947ba0e9b6ef678efd, type: 2}
+  - {fileID: 11400000, guid: cdbcee7587e6db941b29b3bf10292072, type: 2}
+  - {fileID: 11400000, guid: dfbf79ae056675449bd18bb18ef13313, type: 2}
+  - {fileID: 11400000, guid: b43152696571dc6459222f91adb8701c, type: 2}
+  - {fileID: 11400000, guid: 406d78266426cc74c86202b65f97689e, type: 2}
+  - {fileID: 11400000, guid: ed195a6c84011794b9900197302a92c5, type: 2}
   dropPrefab: {fileID: 7973209739370221453, guid: e77afd81b8badab4487226db36927ccf, type: 3}
 --- !u!1 &4289862068599700704
 GameObject:

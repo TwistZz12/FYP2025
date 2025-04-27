@@ -17,7 +17,8 @@ public class PlayerDeadState : PlayerState
     {
         base.Enter();
 
-        GameObject.Find("Canvas").GetComponent<UI>().SwitchOnEndScreen();
+        if (UI.instance != null)
+            UI.instance.SwitchOnEndScreen();
     }
 
     public override void Exit()

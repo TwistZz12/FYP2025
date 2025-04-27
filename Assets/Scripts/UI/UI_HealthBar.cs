@@ -11,18 +11,16 @@ public class UI_HealthBar : MonoBehaviour
     private RectTransform myTransform;
     private Slider slider;
 
-    private void Start()
+    private void Awake()
     {
         myTransform = GetComponent<RectTransform>();
-        
-        slider = GetComponentInChildren<Slider>();
-        
-
-
-
-        UpdateHealthUI();
+        slider      = GetComponentInChildren<Slider>();
     }
 
+    private void Start()
+    {
+        UpdateHealthUI();
+    }
 
     private void UpdateHealthUI()
     {
@@ -36,16 +34,15 @@ public class UI_HealthBar : MonoBehaviour
         myStats.onHealthChanged += UpdateHealthUI;
     }
 
-
     private void OnDisable()
     {
         if(entity != null)
             entity.onFlipped -= FlipUI;
 
-
         if(myStats != null)
             myStats.onHealthChanged -= UpdateHealthUI;
     }
+
     private void FlipUI()
     {
        myTransform.Rotate(0, 180, 0);
